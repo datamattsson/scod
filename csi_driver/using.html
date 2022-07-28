@@ -213,13 +213,13 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>HPE CSI DRIVER FOR KUBERNETES &raquo;</li><li>Using</li>
+          <li>HPE CSI DRIVER FOR KUBERNETES &raquo;</li>
+      <li>Using</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
   <hr/>
 </div>
-
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
@@ -1071,7 +1071,7 @@ spec:
 <li>Certain CNIs may have issues to gracefully restore access from the NFS clients to the NFS export. Flannel have exhibited this problem and the most consistent performance have been observed with Calico.</li>
 <li>The <a href="#using_volume_mutations">Volume Mutation</a> feature does not work on the NFS <code>PVC</code>. If changes are needed, perform the change on the backing "ReadWriteOnce" <code>PVC</code>.</li>
 <li>As outlined in <a href="#using_the_nfs_server_provisioner">Using the NFS Server Provisioner</a>, CSI snapshots and cloning of NFS <code>PVCs</code> requires the CSI snapshot and NFS server to reside in the same <code>Namespace</code>. This also applies when using third-party backup software such as Kasten K10.</li>
-<li>The NFS servers that are deployed by the HPE CSI Driver are not managed during CSI driver upgrades. Manual <a href="operations.html#upgrade_nfs_servers">upgrade is required</a>.</li>
+<li>The NFS servers deployed by the HPE CSI Driver are not managed during CSI driver upgrades. Manual <a href="operations.html#upgrade_nfs_servers">upgrade is required</a>.</li>
 </ul>
 <p>See <a href="diagnostics.html#nfs_server_provisioner_resources">diagnosing NFS Server Provisioner issues</a> for further details.</p>
 <h3 id="using_volume_encryption">Using Volume Encryption<a class="headerlink" href="#using_volume_encryption" title="Permanent link">&para;</a></h3>

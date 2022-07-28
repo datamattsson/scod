@@ -219,13 +219,13 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>HPE CSI DRIVER FOR KUBERNETES &raquo;</li><li>Deployment</li>
+          <li>HPE CSI DRIVER FOR KUBERNETES &raquo;</li>
+      <li>Deployment</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
   <hr/>
 </div>
-
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
@@ -686,7 +686,7 @@ kubectl apply -f https://raw.githubusercontent.com/hpe-storage/co-deployments/ma
 </code></pre></div></div>
 <div class="admonition error">
 <p class="admonition-title">HPE Alletra 9000, Primera and 3PAR users</p>
-<p>If you are reinstalling the HPE CSI Driver, <strong>DO NOT</strong> remove the <code>crd/hpevolumeinfos.storage.hpe.com</code> resource. This <code>CustomResourceDefinition</code> contains important volume metadata used by the HPE Alletra 9000, Primera and 3PAR CSP. HPE CSI Driver <strong>v2.0.0 and below</strong> shared the same YAML file for <code>crds</code> and CSP and would require a manual removal of the individual <code>Service</code> and <code>Deployment</code> in the "hpe-storage" <code>Namespace</code>.</p>
+<p>If you are reinstalling the HPE CSI Driver, <strong>DO NOT</strong> remove the <code>crd/hpevolumeinfos.storage.hpe.com</code> resource. This <code>CustomResourceDefinition</code> contains important volume metadata used by the HPE Alletra 9000, Primera and 3PAR CSP. HPE CSI Driver <strong>v2.0.0 and below</strong> share the same YAML file for <code>crds</code> and CSP and would require a manual removal of the individual <code>Service</code> and <code>Deployment</code> in the "hpe-storage" <code>Namespace</code>.</p>
 </div>
 <p>Uninstall the CSI driver:</p>
 <div class=md-fenced-code-tabs id=tab-tab-group-21><input name=tab-group-21 type=radio id=tab-group-21-0_text checked=checked class=code-tab data-lang=text aria-controls=tab-group-21-0_text-panel role=tab><label for=tab-group-21-0_text class=code-tab-label data-lang=text id=tab-group-21-0_text-label>Kubernetes 1.24</label><div class=code-tabpanel role=tabpanel data-lang=text id=tab-group-21-0_text-panel aria-labelledby=tab-group-21-0_text-label><pre><code class=text>kubectl delete -f https://raw.githubusercontent.com/hpe-storage/co-deployments/master/yaml/csi-driver/v2.2.0/hpe-csi-k8s-1.24.yaml
