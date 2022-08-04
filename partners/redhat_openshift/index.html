@@ -109,6 +109,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#security_model">Security model</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#deployment">Deployment</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#upgrading">Upgrading</a>
@@ -219,6 +221,7 @@
 <li><a href="#openshift_4">OpenShift 4</a><ul>
 <li><a href="#certified_combinations">Certified combinations</a></li>
 <li><a href="#security_model">Security model</a></li>
+<li><a href="#limitations">Limitations</a></li>
 <li><a href="#deployment">Deployment</a><ul>
 <li><a href="#upgrading">Upgrading</a></li>
 <li><a href="#prerequisites">Prerequisites</a></li>
@@ -250,33 +253,9 @@
 <tbody>
 <tr>
 <td>Certified</td>
-<td>4.4</td>
-<td>1.4.0</td>
-<td>Nimble, Primera and 3PAR</td>
-</tr>
-<tr>
-<td>Uncertified<sup>2</sup></td>
-<td>4.5 (Upgrade path only)</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Certified</td>
-<td>4.6 EUS<sup>3</sup></td>
-<td>1.4.0, 2.0.0, 2.1.3</td>
-<td>Alletra, Nimble, Primera and 3PAR</td>
-</tr>
-<tr>
-<td>Uncertified<sup>2</sup></td>
-<td>4.7 (Upgrade path only)</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>Certified</td>
-<td>4.8 EUS<sup>3</sup></td>
-<td>2.1.3, 2.2.1</td>
-<td>Alletra, Nimble, Primera and 3PAR</td>
+<td>4.10 EUS<sup>3</sup></td>
+<td>2.2.1</td>
+<td><a href="../../container_storage_provider/index.html">All</a></td>
 </tr>
 <tr>
 <td>Uncertified<sup>2</sup></td>
@@ -286,20 +265,33 @@
 </tr>
 <tr>
 <td>Certified</td>
-<td>4.10 EUS<sup>3</sup></td>
-<td>2.2.1</td>
-<td>Alletra, Nimble, Primera and 3PAR</td>
+<td>4.8 EUS<sup>3</sup></td>
+<td>2.1.3<sup>4</sup>, 2.2.1</td>
+<td><a href="../../container_storage_provider/index.html">All</a></td>
+</tr>
+<tr>
+<td>Uncertified<sup>2</sup></td>
+<td>4.7 (Upgrade path only)</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Certified</td>
+<td>4.6 EUS<sup>3</sup></td>
+<td>1.4.0<sup>4</sup>, 2.0.0<sup>4</sup>, 2.1.3<sup>4</sup></td>
+<td><a href="../../container_storage_provider/index.html">All</a></td>
 </tr>
 </tbody>
 </table>
 <p><small><sup>1</sup> = End of life support per <a href="https://access.redhat.com/support/policy/updates/openshift">Red Hat OpenShift Life Cycle Policy</a>.</small><br />
 <small><sup>2</sup> = HPE will only be certifying the HPE CSI Operator for Kubernetes on <strong>EVEN</strong> versions of Red Hat OpenShift (i.e. 4.4, 4.6, etc). The Operator will not go through the Red Hat certification process for <strong>MIDDLE</strong> releases (i.e. 4.5, 4.7, etc.) and will only be supported as upgrade path to the next <strong>EVEN</strong> release of Red Hat OpenShift.</small><br />
-<small><sup>3</sup> = Red Hat OpenShift <a href="https://access.redhat.com/support/policy/updates/openshift-eus">Extended Update Support</a>.</small></p>
+<small><sup>3</sup> = Red Hat OpenShift <a href="https://access.redhat.com/support/policy/updates/openshift-eus">Extended Update Support</a>.</small></br />
+<small><sup>4</sup> = This version is currently uninstallable.</small></p>
 <p>Check this table periodically for future releases.</p>
 <div class="admonition seealso">
 <p class="admonition-title">Pointers</p>
 <ul>
-<li>Other combinations may work but will not be supported.  </li>
+<li>Other combinations may work but will not be supported.</li>
 <li>Both Red Hat Enterprise Linux and Red Hat CoreOS worker nodes are supported.</li>
 <li>Instructions on this page only reflect the current version of the CSI Operator and OpenShift.</li>
 </ul>
@@ -312,6 +304,11 @@
 <p class="admonition-title">Note</p>
 <p>If you run into issues writing to persistent volumes provisioned by the HPE CSI Driver under a restricted SCC, add the <code>fsMode: "0770"</code> parameter to the <code>StorageClass</code> with RWO claims or <code>fsMode: "0777"</code> for RWX claims.</p>
 </div>
+<h3 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h3>
+<p>Since the CSI Operator only provide "Basic Install" capabilities. The following limitations apply.</p>
+<ul>
+<li>The <code>ConfigMap</code> "hpe-linux-config" that controls host configuration is immutable</li>
+</ul>
 <h3 id="deployment">Deployment<a class="headerlink" href="#deployment" title="Permanent link">&para;</a></h3>
 <p>The HPE CSI Operator for Kubernetes needs to be installed through the interfaces provided by Red Hat. Do not follow the instructions found on OperatorHub.io. </p>
 <div class="admonition tip">
@@ -330,7 +327,9 @@
 <p>Once the steps have been followed for the particular version transition:</p>
 <ul>
 <li>Uninstall the <code>HPECSIDriver</code> instance</li>
-<li>Uninstall the HPE CSI Operator for Kubernetes</li>
+<li>Delete the "hpecsidrivers.storage.hpe.com" <code>CRD</code><br />:
+  <code>oc delete crd/hpecsidrivers.storage.hpe.com</code></li>
+<li><a href="#uninstall_the_hpe_csi_operator">Uninstall</a> the HPE CSI Operator for Kubernetes</li>
 <li>Proceed to installation through the <a href="#openshift_web_console">OpenShift Web Console</a> or <a href="#openshift_cli">OpenShift CLI</a></li>
 </ul>
 <h4 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h4>
@@ -451,14 +450,22 @@ spec:
 <p>Do not modify or remove these <code>CRDs</code> or <code>APIServices</code> if you are upgrading or reinstalling the HPE CSI driver in order to prevent data loss.</p>
 </div>
 <p>The following are <code>CRDs</code> installed by the HPE CSI driver.</p>
-<p> <pre><code class=text>hpenodeinfos.storage.hpe.com
+<p> <pre><code class=text>hpecsidrivers.storage.hpe.com
+hpenodeinfos.storage.hpe.com
 hpereplicationdeviceinfos.storage.hpe.com
 hpesnapshotgroupinfos.storage.hpe.com
 hpevolumegroupinfos.storage.hpe.com
 hpevolumeinfos.storage.hpe.com
+snapshotgroupclasses.storage.hpe.com
+snapshotgroupcontents.storage.hpe.com
+snapshotgroups.storage.hpe.com
+volumegroupclasses.storage.hpe.com
+volumegroupcontents.storage.hpe.com
+volumegroups.storage.hpe.com
 </code></pre></p>
 <p>The following are <code>APIServices</code> installed by the HPE CSI driver.</p>
 <p> <pre><code class=text>v1.storage.hpe.com
+v2.storage.hpe.com
 </code></pre></p>
 <p>Please refer to the OLM Lifecycle Manager documentation on how to safely <a href="https://olm.operatorframework.io/docs/tasks/uninstall-operator/">Uninstall your operator</a>.</p>
               
