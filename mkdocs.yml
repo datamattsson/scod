@@ -50,7 +50,7 @@ plugins:
         'partners/suse_harvester/index.md': 'csi_driver/partners/suse_virtualization/index.md'
         'csi_driver/partners/suse_harvester/index.md': 'csi_driver/partners/suse_virtualization/index.md'
         'partners/suse_rancher/index.md': 'csi_driver/partners/suse_rancher/index.md'
-        'partners/tkgi/index.md': 'csi_driver/partners/tkgi/index.md'
+        'partners/tkgi/index.md': 'csi_driver/partners/vmware/index.md'
         'partners/vmware/index.md': 'csi_driver/partners/vmware/index.md'
         'partners/index.md': 'csi_driver/partners/index.md'
         'ezmeral_container_platform/install.md': 'csi_driver/partners/hpe_ezmeral/install.md'
