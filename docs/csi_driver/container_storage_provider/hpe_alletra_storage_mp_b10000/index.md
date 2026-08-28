@@ -518,7 +518,7 @@ In the HPE CSI Driver version 1.4.0+, a volume set with QoS settings can be crea
 | bwMinGoalKb<sup>1</sup> | Text   | Bandwidth minimum goal in kilobytes per second for the target volume set. Example: "300" |
 | latencyGoal<sup>1</sup> | Text   | Latency goal in milliseconds (ms) or microseconds(us) for the target volume set. Example: "300ms" or "500us" |
 
-<small><sup>1</sup> = Parameter is deprecated and have no effect on HPE Alletra Storage MP B10000 10.5 and later.</small>
+<small><sup>1</sup> = Parameter have no effect on HPE Alletra Storage MP B10000 10.5 and earlier.</small>
 
 !!! caution "Important"
     All QoS parameters supported by the platform are mandatory when creating a `VolumeGroupClass`.
