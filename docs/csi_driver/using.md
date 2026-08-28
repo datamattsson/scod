@@ -998,7 +998,7 @@ See [diagnosing NFS Server Provisioner issues](diagnostics.md#nfs_server_provisi
 
 ### Using Volume Encryption
 
-From version 2.0.0 and onwards of the CSI driver supports host-based volume encryption for any of the block-based CSPs supported by the CSI driver.
+From version 2.0.0 and onwards of the CSI driver supports host-based volume encryption for any of the block-based CSPs supported by the CSI driver. Note that only `volumeMode: Filesystem` (the default) is supported.
 
 Host-based volume encryption is controlled by `StorageClass` parameters configured by the Kubernetes administrator and may be configured to be overridden by Kubernetes users. In the below example, a single `Secret` is used to encrypt and decrypt all volumes provisioned by the `StorageClass`.
 

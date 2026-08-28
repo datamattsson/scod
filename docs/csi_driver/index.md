@@ -476,6 +476,7 @@ HPE currently supports up to three minor releases of the HPE CSI Driver for Kube
 * Performing rolling upgrades of Kubernetes requires that the CSI controller and CSPs are scheduled on nodes that don't allow `PersistentVolumes` from the CSI driver. See [apply nodeSelectors and tolerations to perform rolling upgrades](operations.md#apply_nodeselectors_and_tolerations_to_perform_rolling_upgrades) for more details.
 * FC and iSCSI protocols uses multipath devices assembled by SCSI devices appearing on the node during discovery. These SCSI devices are sometimes distinguished as a "path" to the underlying storage to improve performance and resilience. It's recommended to not exceed 4000 paths in total for a node. In a scenario where it's desirable to scale up to 1000 multipath devices, no more than 4 paths per multipath may be presented at any give time. With the default `maxVolumesPerNode` set at 250, there can be up to 16 paths per multipath device.
 * It takes around 5-10 seconds to attach a `PersistentVolume` to a node. This number scales linearly. Attaching the recommended 250 `maxVolumesPerNode` if 250 requests are submitted to the cluster at the exact same time will take (`(250 * 10) / 60`) 42 minutes and about 3 hours for 1000 `VolumeAttachments` if all attachments were to be processed for one particular node. Processing 1000 `VolumeAttachments` across 32 nodes takes around 5 minutes. Plan accordingly.
+* The CSI does not support host-based encryption on `PVCs` using `volumeMode: Block`.
 
 ## iSCSI CHAP Considerations
 
