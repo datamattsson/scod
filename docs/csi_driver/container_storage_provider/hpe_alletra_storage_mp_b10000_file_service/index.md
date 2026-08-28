@@ -238,6 +238,7 @@ These are the current limitations of the HPE Alletra Storage MP B10000 File Serv
 - Maximum 20% of the array provisioned capacity may be used for File Service storage.
 - Maximum 64TiB capacity per file share.
 - Export permissions on the array are set to `*` (defined as "all" in the array interfaces) and will be reachable from any host that can reach the File interfaces on the array.
+- Due to how exports are presented on the array, deep directory structures may exceed the kernel hard-coded MAXPATHLEN limit of 4096 characters. The number of characters available to applications is 4008.
 
 ## Support
 
