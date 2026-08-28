@@ -364,6 +364,7 @@ These `StorageClass` parameters are applicable only for replication, "primarySec
 | primarySecretNamespace             | Text    | The `Namespace` for the primary array `Secret`. |
 | primarySecret                      | Text    | The name of the `Secret` for the primary array. |
 | remoteCopyGroup<sup>2</sup>        | Text    | Name of new or existing RCG<sup>1</sup> on the array. |
+| replicationPolicy                  | Text    | Set to "active" Active Peer Persistence, omit or change to empty string if using Classic Peer Persistence. |
 | replicationDevices                 | Text    | Indicates name of `hpereplicationdeviceinfos` Custom Resource Definition (CRD). |
 | periodicReplicationInterval        | Text    | Optional interval in seconds when using `targetMode: periodic` in `HPEReplicationDeviceInfos`. Defaults to the minimum of 15 seconds and a maximum of 366 days (31622400 seconds). Integers needs to be quoted as parameters only support strings, i.e: `periodicReplicationInterval: "25"`.
 | oneRcgPerPvc<sup>2</sup>           | Boolean | Creates a dedicated Remote Copy group per persistent volume. (Optional) |
@@ -430,7 +431,7 @@ Description of the parameters.
 
 | Parameter          | Option  | Description |
 | ------------------ | ------- | ----------- |
-| replicationPolicy  | Text    | Set to "active" for Active Peer Persistence and omit or change to empty string if using Classic Peer Persistence. |
+| replicationPolicy  | Text    | Set to "active" for Active Peer Persistence, omit or change to empty string if using Classic Peer Persistence. |
 | remoteCopyGroup    | Text    | Name of existing RCG. |
 | replicationDevices | Text    | Name of `HPEReplicationDeviceInfo` `CRD`. |
 | oneRcgPerPvc       | Boolean | Creates a dedicated RCG per `PVC`. (Optional) |
