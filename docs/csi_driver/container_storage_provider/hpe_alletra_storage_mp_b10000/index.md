@@ -146,18 +146,18 @@ Example default `StorageClass` ([download](examples/storageclass.yaml)):
 | Parameter  | String<sup>*</sup>  | Description |
 | ---------- | ------- | ----------- |
 | accessProtocol (**Required**)  | nvmetcp<sup>5</sup>, fc or iscsi | The access protocol to use when attaching the persistent volume. |
-| cpg <sup>1</sup> | Text | The name of existing CPG to be used for volume provisioning. If the `cpg` parameter is not specified, the CSP will select a CPG available to the array. |
-| snapCpg <sup>1</sup> | Text | The name of the snapshot CPG to be used for volume provisioning. Defaults to value of `cpg` if not specified. |
-| compression <sup>1</sup> | Boolean | Indicates that the volume should be compressed. (3PAR only) |
-| provisioningType <sup>1</sup> | tpvv | Default. Indicates Thin provisioned volume type. |
+| cpg<sup>1</sup> | Text | The name of existing CPG to be used for volume provisioning. If the `cpg` parameter is not specified, the CSP will select a CPG available to the array. |
+| snapCpg<sup>6</sup> | Text | The name of the snapshot CPG to be used for volume provisioning. Defaults to value of `cpg` if not specified. |
+| compression<sup>1</sup> | Boolean | Indicates that the volume should be compressed. (3PAR only) |
+| provisioningType<sup>1</sup> | tpvv | Default. Indicates Thin provisioned volume type. |
 |                               | full <sup>3</sup> | Indicates Full provisioned volume type. |
 |                               | dedup <sup>3</sup> | Indicates Thin Deduplication volume type. |
 |                               | reduce <sup>4</sup> | Indicates Data Reduction volume type. |
 | hostSeesVLUN | Boolean | Enable "host sees" VLUN template. |
 | importVolumeName | Text | Name of the volume to import. |
 | importVolAsClone | Text | Name of the volume to clone and import. |
-| cloneOf <sup>2</sup> | Text | Name of the `PersistentVolumeClaim` to clone. |
-| virtualCopyOf <sup>2</sup> | Text | Name of the `PersistentVolumeClaim` to snapshot. |
+| cloneOf<sup>2</sup> | Text | Name of the `PersistentVolumeClaim` to clone. |
+| virtualCopyOf<sup>2</sup> | Text | Name of the `PersistentVolumeClaim` to snapshot. |
 | qosName | Text | Name of the volume set which has QoS rules applied. |
 | iscsiPortalIps | Text | Comma separated list of the array iSCSI port IPs. |
 | fcPortsList | Text   | Comma separated list of available FC ports. Example: "0:5:1,1:4:2,2:4:1,3:4:2" Default: Use all available ports. |
@@ -169,6 +169,7 @@ Example default `StorageClass` ([download](examples/storageclass.yaml)):
  <br /><sup>2</sup> = Volumes with snapshots/clones can't be modified.
  <br /><sup>3</sup> = HPE 3PAR only parameter.
  <br /><sup>4</sup> = Not available for HPE 3PAR.
+ <br /><sup>6</sup> = Parameters that are not editable after provisioning on Alletra Storage MP B10000 10.5 and later.
  <br />Other notes:
  <br /><sup>5</sup> = Only HPE Alletra Storage MP B10000 supports NVMe/TCP.
 </small>
