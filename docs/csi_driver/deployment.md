@@ -153,7 +153,7 @@ kubectl get csv -n my-hpe-csi-operator
 Next, a `HPECSIDriver` resource needs to be created. Create a file named `hpe-csi-operator.yaml`, edit and apply (or copy the command from the top of the content).
 
 !!! note "Good to know"
-    From HPE CSI Driver 3.3.0 and later, the defaults are taken from the shipping version of the CSI driver Helm chart values. In order to make customizations, simply add the necessary Helm chart keys in the `.spec` of the `HPECSIDriver`, an [example](https://github.com/hpe-storage/co-deployments/blob/master/operators/hpe-csi-operator/destinations/hpecsidriver-latest-sample.yaml).
+    From HPE CSI Driver v3.3.0 and later, the defaults are taken from the shipping version of the CSI driver Helm chart values. In order to make customizations, simply add the necessary Helm chart keys in the `.spec` of the `HPECSIDriver`, an [example](https://github.com/hpe-storage/co-deployments/blob/master/operators/hpe-csi-operator/destinations/hpecsidriver-latest-sample.yaml).
 
 ```yaml fct_label="HPE CSI Operator v3.3.0 and later"
 # kubectl apply -n hpe-storage -f {{ config.site_url }}csi_driver/examples/deployment/hpecsidriver-sample.yaml

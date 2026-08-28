@@ -194,7 +194,7 @@ deployment "hpe-csi-driver-operator" successfully rolled out
 The next step is to create a `HPECSIDriver` resource.
 
 !!! note "Good to know"
-    From HPE CSI Driver 3.3.0 and later, the defaults are taken from the shipping version of the CSI driver Helm chart values. In order to make customizations, simply add the necessary Helm chart keys in the `.spec` of the `HPECSIDriver`, an [example](https://github.com/hpe-storage/co-deployments/blob/master/operators/hpe-csi-operator/destinations/hpecsidriver-latest-sample.yaml).
+    From HPE CSI Driver v3.3.0 and later, the defaults are taken from the shipping version of the CSI driver Helm chart values. In order to make customizations, simply add the necessary Helm chart keys in the `.spec` of the `HPECSIDriver`, an [example](https://github.com/hpe-storage/co-deployments/blob/master/operators/hpe-csi-operator/destinations/hpecsidriver-latest-sample.yaml).
 
 ```yaml fct_label="HPE CSI Operator v3.3.0 and later"
 # oc apply -n hpe-storage -f {{ config.site_url }}csi_driver/examples/deployment/hpecsidriver-sample.yaml

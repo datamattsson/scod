@@ -61,13 +61,13 @@ The CSP requires access to a user with either `edit` or the `super` role. It's r
 
 ### Virtual Domains
 
-Virtual Domains are not yet fully implemented by the CSP. From HPE CSI Driver v2.5.0, it's possible to manually create the Kubernetes hosts connecting to storage within the Virtual Domain. Once the hosts have been created, deploy the CSI driver with the Helm chart using the "disableHostDeletion" parameter set to "true". The Virtual Domain user may create the hosts through the Virtual Domain if the "AllowDomainUsersAffectNoDomain" parameter is set to either "hostonly" or "yes" on the array.
+Virtual Domains were officially introduced in v3.3.0. From HPE CSI Driver v2.5.0, it's possible to manually create the Kubernetes hosts connecting to storage within the Virtual Domain. Once the hosts have been created, deploy the CSI driver with the Helm chart using the "disableHostDeletion" parameter set to "true". The Virtual Domain user may create the hosts through the Virtual Domain if the "AllowDomainUsersAffectNoDomain" parameter is set to either "hostonly" or "yes" on the array. The "disableHostDeletion" parameter is not needed for v3.3.0 and later.
 
 #### Detailed steps to use Virtual Domains
 
 These steps assumes access to the storage platform with privileges to create domains and change settings.
 
-Login to the storage platform with SSH. Create an new domain:
+Login to the storage system with SSH. Create an new domain:
 
 ```text
 cli% createdomain -comment "This is a test domain." my-kubernetes-domain-0
@@ -85,29 +85,31 @@ Next, make sure domain users are allowed to create hosts outside the domain.
 cli% setsys AllowDomainUsersAffectNoDomain hostonly
 ```
 
+Next steps would involve creating a `StorageClass` with the "virtualDomain" parameter set to the domain name. The credentials in the `Secret` should refer to the user assigned to the domain.
+
+##### Virtual Domains with HPE CSI Driver v3.2.0 or Earlier
+
 Hosts can be created manually at any point using the `createhost` command or other means on the array either from the user domain directly or from the global domain.
 
 !!! caution "Important"
     From HPE CSI Driver 3.0.0 and newer the hostnames needs to be prefixed with the protocol name, such as "iqn" for iSCSI, "nqntcp" for NVMe/TCP and "wwn" for Fibre Channel, i.e "iqn-myhost" where "myhost" is the host name found in the `HPENodeInfos` `CustomResourceDefinition`. The total string length may not exceed 27 characters.
 
-The next steps involve installing the HPE CSI Driver for Kubernetes with `disableHostDeletion` set to `true`. The steps to supply the parameter depends on if the Helm chart or Operator is being used.
+The next steps involve installing the HPE CSI Driver for Kubernetes with "disableHostDeletion" set to "true". The steps to supply the parameter depends on if the Helm chart or Operator is being used.
 
 - Helm chart install from [ArtifactHub.io](https://artifacthub.io/packages/helm/hpe-storage/hpe-csi-driver).
 - Operator install for [OpenShift](../../partners/redhat_openshift/index.md).
 
 Once the CSI driver is installed and running, [add an HPE storage backend](../../deployment.md#add_an_hpe_storage_backend) with the credentials provided in the steps above.
 
-!!! note
-    Remote Copy Groups managed by the CSP have not been tested with Virtual Domains at this time.
-
 ### Limitations
 
 These are the generally known limitation of the CSP.
 
 - The default `VolumeAttachments` per compute node is 250. The maximum supported is 1000. HPE recommends not exceeding 500 `VolumeAttachments` per node and leave headroom for emergencies. It's always recommended to test the upper bounds before deploying to production. Also be fully understood with the path limitation explained in [Known Limitations](../../index.md#known_limitations) of the CSI driver. Increasing the "maxVolumesPerNode" parameter from the default of 250 is explained in the [Helm chart](https://artifacthub.io/packages/helm/hpe-storage/hpe-csi-driver). The default limit of 250 has been well tested and is supported with FC, iSCSI and NVMe/TCP.
-- Compute node hostnames may not exceed 27 characters. The storage platform limitation is 31 characters. Since HPE CSI Driver 3.0.0, the node name has a protocol prefix such as "nqntcp-", "iqn-" or "wwn-". Further, the CSP truncates the domain name from the Kubernetes node name. Make sure node uniqueness is in the beginning of the hostname to avoid problems. From CSI driver 3.3.0 it's possible to hash the node names during Helm chart install. Using hashed names is limited to greenfield Kubernetes clusters with no existing `VolumeAttachments`.
+- Compute node hostnames may not exceed 27 characters. The storage platform limitation is 31 characters. Since HPE CSI Driver 3.0.0, the node name has a protocol prefix such as "nqntcp-", "iqn-" or "wwn-". Further, the CSP truncates the domain name from the Kubernetes node name. Make sure node uniqueness is in the beginning of the hostname to avoid problems. From CSI driver v3.3.0 it's possible to hash the node names during Helm chart install. Using hashed names is limited to greenfield Kubernetes clusters with no existing `VolumeAttachments`.
 - IPv6 may only be used for iSCSI and API endpoint access. IPv6 addressing may not be used for NVMe/TCP, native NFS or replication.
 - Inline ephemeral volumes are not supported by the CSP due to a constraint in the naming translation.
+- Using "virtualCopyOf", static provisioning and making `PVC` annotations for mutations of RCGs is not supported with Virtual Domains at this time.
 
 ## VLUN Templates
 
@@ -161,6 +163,7 @@ Example default `StorageClass` ([download](examples/storageclass.yaml)):
 | qosName | Text | Name of the volume set which has QoS rules applied. |
 | iscsiPortalIps | Text | Comma separated list of the array iSCSI port IPs. |
 | fcPortsList | Text   | Comma separated list of available FC ports. Example: "0:5:1,1:4:2,2:4:1,3:4:2" Default: Use all available ports. |
+| virtualDomain | Text | Existing domain on the array to create hosts and volumes in. Default: no domain assigned. |
 
 <small>
  <sup>*</sup> = All parameter keys and values are case sensitive. For example, `accessProtocol: "FC"` won't have the expected results.

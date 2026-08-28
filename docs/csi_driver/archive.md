@@ -19,7 +19,7 @@ Release highlights:
 
 Upgrade considerations:
 
-* Existing claims provisioned with the NFS Server Provisioner [needs to be upgraded](operations.md#upgrade_to_v252).
+* Existing claims provisioned with the NFS Server Provisioner [needs to be upgraded](operations.md#upgrade_nfs_servers).
 
 !!! note
     There is no v2.5.1 release of the CSI driver, only downstream artifacts such as the Helm chart and Operator.
@@ -106,7 +106,7 @@ Release highlights:
 
 Upgrade considerations:
 
-* Existing claims provisioned with the NFS Server Provisioner [needs to be upgraded](operations.md#upgrade_to_v250).
+* Existing claims provisioned with the NFS Server Provisioner [needs to be upgraded](operations.md#upgrade_nfs_servers).
 * Current users of CHAP needs to review the [iSCSI CHAP Considerations](index.md#iscsi_chap_considerations)
 * The `importVol` parameter has been renamed `importVolumeName` for [HPE Alletra Storage MP and Alletra 9000/Primera/3PAR](container_storage_provider/hpe_alletra_storage_mp_b10000/index.md)
 
@@ -261,7 +261,7 @@ Release highlights:
 
 Upgrade considerations:
 
-* Existing claims provisioned with the NFS Server Provisioner [needs to be upgraded](operations.md#upgrade_to_v241).
+* Existing claims provisioned with the NFS Server Provisioner [needs to be upgraded](operations.md#upgrade_nfs_servers).
 
 <table>
   <tr>
@@ -342,7 +342,7 @@ Release highlights:
 
 Upgrade considerations:
 
-* Existing claims provisioned with the NFS Server Provisioner [needs to be upgraded](operations.md#upgrade_to_v240).
+* Existing claims provisioned with the NFS Server Provisioner [needs to be upgraded](operations.md#upgrade_nfs_servers).
 
 <table>
   <tr>
@@ -417,7 +417,7 @@ Release highlights:
 
 Upgrade considerations:
 
-* Existing claims provisioned with the NFS Server Provisioner [needs to be upgraded](operations.md#upgrade_to_v230).
+* Existing claims provisioned with the NFS Server Provisioner [needs to be upgraded](operations.md#upgrade_nfs_servers).
 
 <table>
   <tr>
