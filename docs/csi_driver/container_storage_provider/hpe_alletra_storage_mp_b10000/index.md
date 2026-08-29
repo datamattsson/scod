@@ -87,6 +87,9 @@ cli% setsys AllowDomainUsersAffectNoDomain hostonly
 
 Next steps would involve creating a `StorageClass` with the "virtualDomain" parameter set to the domain name. The credentials in the `Secret` should refer to the user assigned to the domain.
 
+!!! important "Pro tip"
+    A host can only belong to one domain. Hence using multiple `StorageClasses` to create tenant separation will only work if the hosts are separated per `StorageClass` [using CSI topology](../../using.md#topology_and_volumebindingmode). Further, if it's expected to create multiple virtual domains serving different DNS domains where users are expected to have identical hostnames, i.e "my-compute-1", there will be a name collision where only the existing host will be honored. This problem will surface intermittently as hosts are created and deleted on the array as needed during normal operations. Consider using hashed hostnames (explained in [the Helm chart](https://artifacthub.io/packages/helm/hpe-storage/hpe-csi-driver#configuration-and-installation)) if naming collisions might become an issue.
+
 ##### Virtual Domains with HPE CSI Driver v3.2.0 or Earlier
 
 Hosts can be created manually at any point using the `createhost` command or other means on the array either from the user domain directly or from the global domain.

@@ -23,6 +23,7 @@ parameters:
   shareSquashingOption: "no_root_squash"
   shareNfsVersion: "4"
   shareReadOnly: "false"
+  shareSourcePorts: "insecure"
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 allowVolumeExpansion: true

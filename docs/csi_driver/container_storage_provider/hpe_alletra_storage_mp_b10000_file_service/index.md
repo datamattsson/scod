@@ -19,6 +19,7 @@ The CSP only supports dynamic provisioning of `PersistentVolumes` and no data ma
 | shareSquashingOption           | Text    | Controls the NFS client UID to server UID mapping. Valid options: "no_root_squash", "root_squash", "all_squash". Defaults to "no_root_squash". |
 | shareReadOnly                  | Boolean | Sets the server share read only. Defaults to "false". |
 | shareNfsVersion                | Float   | For future use, Defaults to "4". |
+| shareSourcePorts               | Text    | Set to "insecure" to allow NFS clients to mount exports from ports above 1024. Set to "secure" to only allow mounts from 1024 and below. Default: "secure" |
 
 <small><sup>1</sup> = This parameter has no effect if the `PersistentVolume` being removed is empty (no user data).</small>
 
