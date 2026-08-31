@@ -92,7 +92,7 @@ Next steps would involve creating a `StorageClass` with the "virtualDomain" para
 
 ##### Virtual Domains with HPE CSI Driver v3.2.0 or Earlier
 
-Hosts can be created manually at any point using the `createhost` command or other means on the array either from the user domain directly or from the global domain.
+Once the previous steps have been completed, hosts can be created manually at any point using the `createhost` command or other means on the array either from the user domain directly or from the global domain.
 
 !!! caution "Important"
     From HPE CSI Driver 3.0.0 and newer the hostnames needs to be prefixed with the protocol name, such as "iqn" for iSCSI, "nqntcp" for NVMe/TCP and "wwn" for Fibre Channel, i.e "iqn-myhost" where "myhost" is the host name found in the `HPENodeInfos` `CustomResourceDefinition`. The total string length may not exceed 27 characters.
