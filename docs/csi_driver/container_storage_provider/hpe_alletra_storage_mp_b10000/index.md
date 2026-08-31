@@ -518,7 +518,7 @@ In the HPE CSI Driver version 1.4.0+, a volume set with QoS settings can be crea
 | Parameter    | String   | Description |
 | ------------ | -------- | ----------- |
 | description  | Text     | An identifier to describe the `VolumeGroupClass`. Example: "My VolumeGroupClass" |
-| domain       | Text     | The array Virtual Domain, with which the volume group and related objects are associated with. Example: "sample_domain" |
+| virtualDomain<sup>2</sup>| Text     | The array Virtual Domain, with which the volume group and related objects are associated with. Example: "sample-domain" |
 | bwMaxLimitKb | Text     | Bandwidth maximum limit in kilobytes per second for the target volume set. Example: "30000" |
 | priority<sup>1</sup>    | Text   | The priority level for the target volume set. Example: "low", "normal", "high"|
 | ioMinGoal<sup>1</sup>   | Text   | IOPS minimum goal for the target volume set. Example: "300" |
@@ -526,7 +526,9 @@ In the HPE CSI Driver version 1.4.0+, a volume set with QoS settings can be crea
 | bwMinGoalKb<sup>1</sup> | Text   | Bandwidth minimum goal in kilobytes per second for the target volume set. Example: "300" |
 | latencyGoal<sup>1</sup> | Text   | Latency goal in milliseconds (ms) or microseconds(us) for the target volume set. Example: "300ms" or "500us" |
 
-<small><sup>1</sup> = Parameter have no effect on HPE Alletra Storage MP B10000 10.5 and earlier.</small>
+<small><sup>1</sup> = Parameter have no effect on HPE Alletra Storage MP B10000 10.5 and earlier.<br />
+       <sup>2</sup> = This parameter was named "domain" in versions prior to v3.3.0.
+</small>
 
 !!! caution "Important"
     All QoS parameters supported by the platform are mandatory when creating a `VolumeGroupClass`.

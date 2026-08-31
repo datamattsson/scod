@@ -81,6 +81,7 @@ Release highlights:
 Upgrade considerations:
 
 * Existing claims provisioned with the NFS Server Provisioner [may optionally be upgraded](operations.md#upgrade_to_v330).
+* `VolumeGroupClasses` "domain" parameter has changed to "virtualDomain". Existing `VolumeGroups` will continue to operate but any `VolumeGroupClass` that has a "domain" parameter needs to be recreated.
 
 <table>
   <tr>
