@@ -108,7 +108,8 @@ Once the CSI driver is installed and running, [add an HPE storage backend](../..
 
 These are the generally known limitation of the CSP.
 
-- The default `VolumeAttachments` per compute node is 250. The maximum supported is 1000. HPE recommends not exceeding 500 `VolumeAttachments` per node and leave headroom for emergencies. It's always recommended to test the upper bounds before deploying to production. Regardless of `maxVolumesPerNode` limit being set, do **NOT** exceed more than 4000 paths in total. See [known limitations](../../index.md#known_limitations). The default limit of 250 has been well tested and is supported with FC, iSCSI and NVMe/TCP. 
+- The CSP supports up to 1000 `VolumeAttachments` per node with iSCSI and FC. NVMe/TCP has a platform limitation of 256. See [VolumeAttachment Limitations](../../index.md#volumeattachment_limitations) for more details.
+- Increasing the "maxVolumesPerNode" parameter in the Helm chart to 253 and above will start LUN enumeration for the CSP at 255 for iSCSI and FC. Ensure your FC HBA is configured to enumerate LUNs above 255.
 - Compute node hostnames may not exceed 27 characters. The storage platform limitation is 31 characters. Since HPE CSI Driver 3.0.0, the node name has a protocol prefix such as "nqntcp-", "iqn-" or "wwn-". Further, the CSP truncates the domain name from the Kubernetes node name. Make sure node uniqueness is in the beginning of the hostname to avoid problems. From CSI driver v3.3.0 it's possible to hash the node names during [Helm chart install](https://artifacthub.io/packages/helm/hpe-storage/hpe-csi-driver). Using hashed names is limited to greenfield Kubernetes clusters with no existing `VolumeAttachments`.
 - IPv6 may only be used for iSCSI and API endpoint access. IPv6 addressing may not be used for NVMe/TCP, native NFS or replication.
 - Inline ephemeral volumes are not supported by the CSP due to a constraint in the naming translation.
