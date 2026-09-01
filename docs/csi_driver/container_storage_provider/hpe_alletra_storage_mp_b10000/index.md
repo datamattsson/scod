@@ -61,7 +61,7 @@ The CSP requires access to a user with either `edit` or the `super` role. It's r
 
 ### Virtual Domains
 
-Virtual Domains were officially introduced in v3.3.0. In earlier releases it was possible to manually create the hosts on the array within the Virtual Domain. Once the hosts had been created, deploying the CSI driver with the Helm chart using the "disableHostDeletion" parameter set to "true" prevented the hosts from being managed by the CSI driver. The "disableHostDeletion" parameter is not needed for v3.3.0 and later as the hosts are now managed by the CSI driver as usual.
+Virtual Domains were officially introduced in v3.3.0. In earlier releases it was possible to manually create the hosts on the array within the Virtual Domain. Once the hosts had been created, deploying the CSI driver with the Helm chart using the "disableHostDeletion" parameter set to "true" prevented the hosts from being managed by the CSI driver. The "disableHostDeletion" parameter is not needed for v3.3.0 and later when using Virtual Domains as the hosts are now managed by the CSI driver as usual.
 
 #### Detailed steps to use Virtual Domains
 
