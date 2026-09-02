@@ -7,9 +7,6 @@ The HPE Alletra Storage MP B10000, Alletra 9000 and Primera and 3PAR Storage Con
 
 [TOC]
 
-!!! note
-    For help getting started with deploying the HPE CSI Driver using HPE Alletra Storage MP B10000, Alletra 9000, Primera or 3PAR storage, check out the [tutorial over at HPE Developer](https://developer.hpe.com/blog/9o7zJkqlX5cErkrzgopL/tutorial-how-to-get-started-with-the-hpe-csi-driver-and-hpe-primera-and-).
-
 ## Platform Requirements
 
 Check the corresponding CSI driver version in the [compatibility and support](../../index.md#compatibility_and_support) table for the latest updates on supported Kubernetes version, orchestrators and host OS.
@@ -113,7 +110,7 @@ These are the generally known limitation of the CSP.
 - Compute node hostnames may not exceed 27 characters. The storage platform limitation is 31 characters. Since HPE CSI Driver 3.0.0, the node name has a protocol prefix such as "nqntcp-", "iqn-" or "wwn-". Further, the CSP truncates the domain name from the Kubernetes node name. Make sure node uniqueness is in the beginning of the hostname to avoid problems. From CSI driver v3.3.0 it's possible to hash the node names during [Helm chart install](https://artifacthub.io/packages/helm/hpe-storage/hpe-csi-driver). Using hashed names is limited to greenfield Kubernetes clusters with no existing `VolumeAttachments`.
 - IPv6 may only be used for iSCSI and API endpoint access. IPv6 addressing may not be used for NVMe/TCP, native NFS or replication.
 - Inline ephemeral volumes are not supported by the CSP due to a constraint in the naming translation.
-- Using "virtualCopyOf", static provisioning and making `PVC` annotations for mutations of RCGs is not supported with Virtual Domains at this time.
+- Making `PVC` annotations for mutations of RCGs is not supported with Virtual Domains at this time.
 
 ## VLUN Templates
 

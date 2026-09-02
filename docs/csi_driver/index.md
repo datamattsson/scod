@@ -73,9 +73,10 @@ These are the combinations HPE has tested and can provide official support servi
 
 Release highlights:
 
+* Support for Alletra Storage MP B10000 10.6
 * Improved `VolumeAttachment` scaling for Alletra Storage MP B10000
 * Enhanced multitenancy with hashed CSI hostnames and Virtual Domains
-* Support for Alletra Storage MP B10000 10.6
+* Added an "insecure" option to allow Alletra Storage MP B10000 File Service NFS clients to mount exports from random sources ports >1024
 * Many improvements to security, reliability, availability and scalability
 
 Upgrade considerations:
@@ -96,7 +97,7 @@ Upgrade considerations:
     <th>Operators</th>
     <td>
      <a href="https://operatorhub.io/operator/hpe-csi-operator/stable/hpe-csi-operator.v3.3.0">v3.3.0</a> on OperatorHub<br />
-     <a href="https://catalog.redhat.com/software/container-stacks/detail/5e9874643f398525a0ceb004">v3.3.0</a> via OpenShift console
+     <a href="https://catalog.redhat.com/software/container-stacks/detail/5e9874643f398525a0ceb004">v3.3.0</a> via OpenShift console, see <a href="partners/redhat_openshift">Partner Ecosystems / Red Hat OpenShift</a>
     </td>
   </tr>
   <tr>
@@ -489,7 +490,7 @@ FC and iSCSI protocols uses multipath devices assembled by SCSI disks appearing 
 It takes around 5-10 seconds to attach a `PersistentVolume` to a node. This number scales linearly per node. Attaching the recommended 250 `maxVolumesPerNode` if 250 requests are submitted to the cluster at the exact same time will take (`(250 * 10) / 60`) 42 minutes and about 3 hours for 1000 `VolumeAttachments` if all attachments were to be processed for one node. Processing 1000 `VolumeAttachments` across 32 nodes takes around 5 minutes. Plan accordingly.
 
 !!! danger "VolumeAttachment Recommendations"
-    HPE recommends not exceeding 1000 `VolumeAttachments` and 4000 paths per node. It's advisable to leave headroom (N-2 to remain resilient during a node failure) for emergencies. Recovering a failed node may take hours to reschedule on a small cluster. Other limits may apply based on protocols (LUN limits of FC HBAs as an example) and it's always advisable to test the upper bounds before assuming the node resources are enough for both applications and infrastructure.
+    HPE recommends not exceeding 1000 `VolumeAttachments` and 4000 paths per node. It's advisable to leave headroom (N-2 to remain resilient during a node failure) for emergencies. Recovering a failed node may take hours to reschedule on a small cluster. Other limits may apply based on protocols, LUN limits of FC HBAs and outstanding data management operations such as online clones. It's advisable to test the upper bounds before assuming the resources are enough for both applications and infrastructure.
 
 ## iSCSI CHAP Considerations
 
